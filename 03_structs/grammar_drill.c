@@ -195,7 +195,7 @@ printf("ID:%d VOLTAGE:%.1f\n",pd->id,pd->voltage);
 return 0;
 }*/
 
-struct Node{
+/*struct Node{
     int data;
     struct Node *next;
 };
@@ -213,5 +213,86 @@ int main(){
     free(p);
 
     return 0;
+}*/
+
+/*struct Point{
+    int x,y;
+};
+
+//函数A：传值---不能修改原值
+void print_point(struct Point p){
+    printf("Point:(%d,%d)\n",p.x,p.y);
 }
 
+//函数B：传值并尝试修改---修改副本，不修改原值
+void move_value(struct Point p){
+    p.x +=10;
+    p.y +=10;
+    printf("(move_value inside):(%d,%d)\n",p.x,p.y);
+}
+
+//函数C：传指针，可改变原值
+void move_pointer(struct Point *p){
+    p->x +=10;
+    p->y +=10;
+    printf("(move_value inside):(%d,%d)\n",p->x,p->y);
+}
+
+int main(){
+    struct Point p1={3,5};
+    
+    printf("yuanshi:");
+    print_point(p1);   //(3,5)
+
+    move_value(p1);
+    printf("after move:");
+    print_point(p1);
+
+    move_pointer(&p1);
+    printf("after move:");
+    print_point(p1);
+
+    return 0;
+
+}*/
+
+struct A {
+    int a,b;
+};
+
+void prt(struct A p){
+    printf("ysh:%d,%d\n",p.a,p.b);
+}
+
+//修改副本
+void prt_mve(struct A p){
+    p.a +=20;
+    p.b +=10;
+    printf("aftr chge:%d,%d",p.a,p.b);
+
+}
+
+//修改原值
+void prt_mve_vlu(struct A *p){
+    p->a +=20;
+    p->b +=10;
+    printf("aftr chge_p:%d,%d",p->a,p->b);
+}
+
+void change_pointer(struct A **pp){
+    struct A another={99,99};
+    *pp=&another;
+    
+}
+int main(){
+    struct A p={1,1};
+
+    prt(p);
+    prt_mve(p);
+    prt(p);
+    prt_mve_vlu(&p);
+    prt(p);
+
+    return 0;
+
+}
