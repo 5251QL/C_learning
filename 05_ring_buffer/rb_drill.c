@@ -125,30 +125,30 @@ int main(){
 
 }*/
 
-int buf[SIZE];
-int rb_write=0;
-int rb_read=0;
+int a[SIZE];
+int write_pos=0;
+int read_pos=0;
 
-void write(int data){
-    buf[rb_write]=data;
-    rb_write=(rb_write+1)%SIZE;
+void rb_write(int data){
+    a[write_pos]=data;
+    write_pos=(write_pos+1)%SIZE;
 }
 
-int read (void){
-    int data=buf[rb_read];
-    rb_read=(rb_read+1)%SIZE;
+int rb_read(void){
+    int data=a[read_pos];
+    read_pos=(read_pos+1)%SIZE;
     return data;
 }
 
 int main(){
-    write(1);
-    write(2);
-    write(3);
-    write(4);
-    write(5);
+    rb_write(10);
+    rb_write(20);
+    rb_write(30);
+    rb_write(40);
+    rb_write(50);
 
-    for (int i=0;i<7;i++){
-        printf("read:%d\n",read());
+    for(int i=0;i<8;i++){
+        printf("read:%d\n",rb_read());
     }
 
     return 0;
