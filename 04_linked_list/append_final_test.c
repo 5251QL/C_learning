@@ -17,27 +17,29 @@ struct Node *create_node(int data){
     return node;
 }
 
-void append(struct Node **head_ptr,int data){
+void append(struct Node **head,int data){
     struct Node *new_node=create_node(data);
-    if(*head_ptr==NULL){
-        *head_ptr=new_node;
+    if(*head==NULL){
+        *head=new_node;
         return;
     }
 
-    struct Node *finger=*head_ptr;
-    while(finger->next!=NULL){ //判断指向下一个是否为空
-        finger=finger->next; //不为空指向下一个
+    struct Node *finger=*head;
+    while(finger->next!=NULL){
+        finger=finger->next;
     }
-    finger->next=new_node; //为空向下一个进行赋值
+    finger->next=new_node;
+    return;
 }
 
-void print_list(struct Node *list){
-    struct Node *finger=list;
+void print_list(struct Node *head){
+    struct Node *finger=head;
     while(finger!=NULL){
         printf("%d->",finger->data);
         finger=finger->next;
     }
-    printf("NULL\n");
+    
+
 }
 
 int main(){
@@ -51,4 +53,3 @@ int main(){
 
     return 0;
 }
-

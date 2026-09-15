@@ -9,8 +9,8 @@ struct Node{
 struct Node *create(int data){
     struct Node *node=(struct Node *)malloc(sizeof(struct Node));
     if(node==NULL){
-        printf("malloc fail");
-        exit(1);
+    printf("malloc fail");
+    exit(1);
     }
     node->data=data;
     node->next=NULL;
@@ -29,6 +29,7 @@ void append(struct Node **head,int data){
         finger=finger->next;
     }
     finger->next=new;
+    return;
 }
 
 void print(struct Node *list){
@@ -38,74 +39,56 @@ void print(struct Node *list){
         finger=finger->next;
     }
     printf("NULL\n");
+    return;
 }
 
-void delete(struct Node **head,int target){
+void delete_list(struct Node **head,int target){
     if(*head==NULL){
-        printf("nothing\n");
-        return;
+        printf("nothing");
     }
 
     struct Node *p=*head;
-    struct Node *prev=NULL;
+    struct Node *pb=NULL;
 
     while(p!=NULL&&p->data!=target){
-        prev=p;
+        pb=p;
         p=p->next;
-    }if(p==NULL){
-        printf("nothing\n");
+    }
+
+    if(p==NULL){
+        printf("nothing");
         return;
-    }if(prev==NULL){
+    }if(pb==NULL){
         *head=p->next;
+    }else{
+        pb->next=p->next;
     }
-    else{
-        prev->next=p->next;
-    }
-
-    free(p);
     printf("delete:%d\n",target);
-}
 
-struct Node *reverse(struct Node *head){
-    struct Node *prev=NULL;
-    struct Node *curr=head;
-    struct Node *next=NULL;
-
-    while(curr!=NULL){
-        next=curr->next;
-        curr->next=prev;
-        prev=curr;
-        curr=next;
-    }
-    return prev;
 }
 
 int main(){
     struct Node *head=NULL;
 
-    append(&head,10);
-    append(&head,20);
-    append(&head,30);
-    append(&head,40);
-    append(&head,50);
+    append(&head,1);
+    append(&head,11);
+    append(&head,111);
+    append(&head,1111);
+    append(&head,11111);
 
     print(head);
 
-    head=reverse(head);
+    delete_list(&head,1);
     print(head);
 
-    delete(&head,10);
+    delete_list(&head,111);
     print(head);
 
-    delete(&head,50);
+    delete_list(&head,11111);
     print(head);
 
-    delete(&head,30);
-    print(head);
-
-    delete(&head,1);
-
+    delete_list(&head,123456);
 
     return 0;
-
+    
 }
